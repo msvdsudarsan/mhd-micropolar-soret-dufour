@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software itself and the associated manuscript below."
+type: software
+title: "MHD Micropolar Soret-Dufour BVP: Python solver and independent cross-check"
+abstract: >-
+  Python/SciPy reproducibility code for the manuscript "Nonlinear Coupled
+  Heat and Mass Transfer in MHD Micropolar Fluid Flow past a Vertical
+  Plate with Thermal Dispersion, Soret-Dufour Effects and Chemical
+  Reaction", submitted to the Chinese Journal of Physics. Includes the
+  primary collocation solver, an independently coded shooting cross-check,
+  the entropy-generation and Bejan-number module, and the scripts
+  reproducing every numerical table and figure in the manuscript.
+authors:
+  - given-names: "Sri Venkata Durga Sudarsan"
+    family-names: "Madhyannapu"
+    orcid: "https://orcid.org/0009-0001-2126-6428"
+    affiliation: "Dr. RVR NRI Institute of Technology (Deemed to be University), Pothavarapadu, Agiripalli, Andhra Pradesh 521212, India"
+    email: msvdsudarsan@gmail.com
+  - given-names: "Swetha"
+    family-names: "Lanka"
+    orcid: "https://orcid.org/0000-0001-5542-9486"
+    affiliation: "Sir C. R. Reddy College of Engineering (Autonomous), Eluru, Andhra Pradesh 534007, India"
+    email: swethadeepukommana@gmail.com
+  - given-names: "Venkata Subrahmanyam"
+    family-names: "Sajja"
+    orcid: "https://orcid.org/0000-0003-3926-7426"
+    affiliation: "Koneru Lakshmaiah Education Foundation, Guntur, Andhra Pradesh, India"
+    email: subrahmanyam@kluniversity.in
+  - given-names: "Moganti Satya"
+    family-names: "Suresh"
+    orcid: "https://orcid.org/0009-0004-5942-5748"
+    affiliation: "Sri Vasavi Engineering College, Tadepalligudem, West Godavari, Andhra Pradesh 534101, India"
+    email: mogantisatya9@gmail.com
+  - given-names: "Kankipati"
+    family-names: "Subbarao"
+    affiliation: "Dr. RVR NRI Institute of Technology (Deemed to be University), Pothavarapadu, Agiripalli, Andhra Pradesh 521212, India"
+    email: subbaraokankipati1983@gmail.com
