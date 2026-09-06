@@ -23,7 +23,7 @@ in the manuscript are produced by pure-Python/SciPy code.
    534101, India. ORCID: 0009-0004-5942-5748
 5. Kankipati Subbarao -- Department of Mathematics, Dr. RVR NRI
    Institute of Technology (Deemed to be University), Pothavarapadu,
-   Agiripalli, Andhra Pradesh 521212, India.
+   Agiripalli, Andhra Pradesh 521212, India. ORCID: 0009-0000-3953-2950
 
 ## The energy-equation coefficient
 
