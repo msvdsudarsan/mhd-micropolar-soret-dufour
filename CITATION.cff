@@ -6,10 +6,10 @@ abstract: >-
   Python/SciPy reproducibility code for the manuscript "Nonlinear Coupled
   Heat and Mass Transfer in MHD Micropolar Fluid Flow past a Vertical
   Plate with Thermal Dispersion, Soret-Dufour Effects and Chemical
-  Reaction", submitted to the Chinese Journal of Physics. Includes the
-  primary collocation solver, an independently coded shooting cross-check,
-  the entropy-generation and Bejan-number module, and the scripts
-  reproducing every numerical table and figure in the manuscript.
+  Reaction". Includes the primary collocation solver, an independently
+  coded shooting cross-check, the entropy-generation and Bejan-number
+  module, and the scripts reproducing every numerical table and figure
+  in the manuscript.
 authors:
   - given-names: "Sri Venkata Durga Sudarsan"
     family-names: "Madhyannapu"
