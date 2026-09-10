@@ -91,7 +91,7 @@ directly from the manuscript's equations:
 | `run_analysis.py` | Reproduces Tables 5, 6, 7, 8, 9 and the synergy index, all four Ostrach/Rees-Pop external checks, the entropy-generation second-law check, the regularity-map verification, the sensitivity ranking, the trade-off analysis, and the main manuscript figures (Fig. 1) plus Supplementary Figures S1-S7. |
 | `shooting_crosscheck.py` | The independent shooting-method cross-check described above. Run directly: `python shooting_crosscheck.py`. |
 | `entropy.py` | The entropy-generation number Ns(eta) and Bejan number Be(eta) (Section 4.9), derived from the same solved profiles as the rest of the paper. |
-| `make_entropy_figures.py` | Generates Figures 9-10 (entropy-generation decomposition and Bejan-number vs M) from `entropy.py`. Run after `run_analysis.py`. |
+| `make_entropy_figures.py` | Generates manuscript Figs. 2-3 (entropy-generation decomposition and Bejan-number vs M) from `entropy.py`. Run after `run_analysis.py`. |
 
 ## Correspondence between code output filenames and the final manuscript
 
@@ -137,7 +137,7 @@ pip install -r requirements.txt
 ```bash
 python run_analysis.py          # figures -> ./figures/ (PDF + 300 dpi PNG), tables -> stdout
 python shooting_crosscheck.py   # independent cross-check -> stdout
-python make_entropy_figures.py  # Figures 9-10 (entropy generation, Bejan number) -> ./figures/
+python make_entropy_figures.py  # manuscript Figs. 2-3 (entropy generation, Bejan number) -> ./figures/
 ```
 
 Approximate runtime on a standard laptop CPU (single core, no

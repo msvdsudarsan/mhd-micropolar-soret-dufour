@@ -1,5 +1,6 @@
 """
-Generates the two entropy-generation / Bejan-number figures (fig9, fig10)
+Generates manuscript Figs. 2-3: entropy-generation decomposition and
+Bejan-number profiles (output files retain their original fig9/fig10 names)
 for Section 4.9 of the manuscript. Run after run_analysis.py.
 """
 import os
