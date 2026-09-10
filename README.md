@@ -43,20 +43,20 @@ rescaling, to the classical Ostrach (1953) free-convection equations.
 
 | Check | Result |
 |---|---|
-| Table 6 (M-sweep, 5 rows x 5 columns) | exact match, 6 dp |
-| Table 8 (Sr/Du/Kr/Sc one-at-a-time sweeps) | exact match, 6 dp |
-| Table 9 (25-point joint Sr,Du grid, both theta'(0) and phi'(0)) | exact match, 6 dp |
+| Table 5 (M-sweep, 5 rows x 5 columns) | exact match, 6 dp |
+| Table 7 (Sr/Du/Kr/Sc one-at-a-time sweeps) | exact match, 6 dp |
+| Table 8 (25-point joint Sr,Du grid, both theta'(0) and phi'(0)) | exact match, 6 dp |
 | Section 4.8 synergy index (Eq. 22): corner, grid-average, smallest point | 53.9% / 13.7% / 1.2%, all exact |
 | Table 3 (mesh 200/400/800 nodes x eta_inf = 8/10/12/15) | exact match |
 | Table 4 (both limiting-case reductions) | exact match |
-| Table 7 (Bi-sweep, theta(0)) | exact match |
+| Table 6 (Bi-sweep, theta(0)) | exact match |
 | Classical Ostrach (1953) limit, Pr=0.7 | f''(0)=0.678908, agrees with the value commonly quoted in the secondary literature (~0.674-0.68) to ~0.5% |
 | Classical Ostrach limit, Pr=0.72 (his own tabulated Pr) | -theta'(0)=0.504629, agrees with a value read directly from Ostrach's 1953 text (Nu=63.6 at Gr_x=1e9) to ~0.23% |
 | Classical Ostrach limit, Pr=1.0 | f''(0)=0.642185, agrees with the benchmark value reported by Peker & Oturanc (arXiv:1212.1706) for the classical Ostrach problem (f''(0)=0.6421) to ~0.01% |
 | Rees & Pop (1998) cross-check, Pr=0.7, K=0 | f''(0)=0.678908, -theta'(0)=0.499508, converted from their own Table 1 (n=1) via an exact rescaling: agrees to ~0.0001%/0.0013% -- the tightest external check in this repository |
-| Table 10 (K-sensitivity, K=0..2.0) | exact match, 6 dp; K=0 row confirms -g'(0)=0 (passive microrotation) to floating-point precision |
-| Regularity map (Section 4.11): Delta_min vs analytical bound | exact match to machine precision (0.0 discrepancy) across all 25 (Sr,Du) grid points |
-| Sensitivity ranking (Table 11, Section 4.12) | exact match, 6 dp; dominant parameter per output confirmed (K for f''/g', Bi for theta', Sc for phi') |
+| Table 9 (K-sensitivity, K=0..2.0) | exact match, 6 dp; K=0 row confirms -g'(0)=0 (passive microrotation) to floating-point precision |
+| Regularity map (Supplementary Fig. S6): Delta_min vs analytical bound | exact match to machine precision (0.0 discrepancy) across all 25 (Sr,Du) grid points |
+| Sensitivity ranking (Supplementary Table S2, Section 4.11) | exact match, 6 dp; dominant parameter per output confirmed (K for f''/g', Bi for theta', Sc for phi') |
 | Entropy-generation second-law check (Section 4.9) | Ns >= 0 confirmed across the domain and across the full M-sweep, minimum O(1e-9) |
 
 ## Two independent implementations
@@ -88,10 +88,38 @@ directly from the manuscript's equations:
 | File | Purpose |
 |---|---|
 | `model.py` | The ODE system, boundary conditions, `solve_case()`. |
-| `run_analysis.py` | Reproduces Tables 5, 7, 8, 9, 10 and the synergy index, all four Ostrach/Rees-Pop external checks, the entropy-generation second-law check, the regularity-map verification, the sensitivity ranking, the trade-off analysis, and all main figures (1-8, 11, 12). |
+| `run_analysis.py` | Reproduces Tables 5, 6, 7, 8, 9 and the synergy index, all four Ostrach/Rees-Pop external checks, the entropy-generation second-law check, the regularity-map verification, the sensitivity ranking, the trade-off analysis, and the main manuscript figures (Fig. 1) plus Supplementary Figures S1-S7. |
 | `shooting_crosscheck.py` | The independent shooting-method cross-check described above. Run directly: `python shooting_crosscheck.py`. |
 | `entropy.py` | The entropy-generation number Ns(eta) and Bejan number Be(eta) (Section 4.9), derived from the same solved profiles as the rest of the paper. |
 | `make_entropy_figures.py` | Generates Figures 9-10 (entropy-generation decomposition and Bejan-number vs M) from `entropy.py`. Run after `run_analysis.py`. |
+
+## Correspondence between code output filenames and the final manuscript
+
+The output filenames inside `figures/` (and a few internal function
+names in `run_analysis.py`) were set early in development and were not
+renamed when the manuscript's own figure/table numbering was finalised
+during peer preparation. The mapping to the **final** manuscript and
+Supplementary Material is:
+
+| Code output / function | Final manuscript item |
+|---|---|
+| `fig8_SrDu_contour.{pdf,png}` | Manuscript **Fig. 1** (joint Soret\u2013Dufour sweep) |
+| `fig9_entropy_decomposition.{pdf,png}` (from `make_entropy_figures.py`) | Manuscript **Fig. 2** |
+| `fig10_bejan_M.{pdf,png}` (from `make_entropy_figures.py`) | Manuscript **Fig. 3** |
+| `fig1_base_case.{pdf,png}` | Supplementary **Fig. S8** |
+| `fig11_regularity_map.{pdf,png}` | Supplementary **Fig. S6** |
+| `fig12_tradeoff.{pdf,png}` | Supplementary **Fig. S7** |
+| other `plot_family(...)` outputs (Sr, Du, Kr, Sc, S, M parameter sweeps) | Supplementary **Figs. S1\u2013S5, S9** |
+| `table5_M_sweep()` | Manuscript **Table 5** |
+| `table7_single_sweeps()` | Manuscript **Table 7** |
+| `table8_srdu_grid()` | Manuscript **Table 8** |
+| `table10_K_sensitivity()` | Manuscript **Table 9** (function name retained from an earlier draft numbering) |
+| `table_sensitivity()` | Supplementary **Table S2** (9\u00d74 elasticity matrix) |
+| `table_extended_crosscheck()` | Supplementary **Table S1** |
+
+No numerical results changed between draft and final numbering \u2014
+only the manuscript's own figure/table labels were reorganised when
+material was moved to the Supplementary document.
 
 ## Setup
 
