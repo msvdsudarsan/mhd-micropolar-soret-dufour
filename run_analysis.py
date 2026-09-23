@@ -301,7 +301,7 @@ def table10_K_sensitivity(P: Params):
 def section49_entropy_generation(P: Params):
     """Section 4.7: entropy generation and Bejan number analysis. Computes
     the wall-value decomposition, checks second-law consistency (Ns >= 0)
-    across the domain and across the M-sweep, and generates manuscript Figure 7
+    across the domain and across the M-sweep, and generates manuscript Figure 8
     via make_entropy_figures.py (run separately, or call its functions
     here if entropy.py and make_entropy_figures.py are both present)."""
     from entropy import entropy_profile, wall_entropy_and_bejan
@@ -361,14 +361,14 @@ def main():
     table_extended_crosscheck(P)
 
     print(f"\nFigures written to {FIG_DIR}/")
-    print("Run make_entropy_figures.py separately to generate manuscript Figure 7 "
+    print("Run make_entropy_figures.py separately to generate manuscript Figure 8 "
           "(the entropy-generation decomposition and Bejan-number plots).")
 
 
 
 
 def figure11_regularity_map():
-    """Figure 8 (Section 4.8): regularity map of the coupled thermal-solutal
+    """Figure 9 (Section 4.8): regularity map of the coupled thermal-solutal
     determinant Delta = (1+Sf') - Pr*Sc*Sr*Du. Confirms numerically (see
     docstring below) that the global minimum of Delta(eta) over the whole
     boundary layer equals the analytical boundary value 1-Pr*Sc*Sr*Du exactly
@@ -472,7 +472,7 @@ def table_sensitivity(P: Params):
 
 
 def figure_tradeoff():
-    """Figure 9 (Section 4.9): thermodynamic trade-off map. For the M-sweep,
+    """Figure 10 (Section 4.9): thermodynamic trade-off map. For the M-sweep,
     plots the local Nusselt indicator -theta'(0) against the domain-integrated
     total entropy generation Ns_int = integral_0^eta_inf Ns(eta) d(eta), to see
     whether increasing M improves heat transfer at the cost of, or alongside a
@@ -552,3 +552,53 @@ def table_extended_crosscheck(P: Params):
 
 if __name__ == "__main__":
     main()
+
+
+def make_physical_field_figure(outdir="figures", c=40.0, eta_e=6.0):
+    """Reproduce manuscript Figure 2: the base-case similarity solution mapped
+    back into physical (x, y) coordinates. This is an exact change of variables
+    from the solution computed above -- eta = c*y*x^(-1/4), u ~ x^(1/2)*f'(eta),
+    psi ~ x^(3/4)*f(eta) -- not a separate computation. The constant c stands
+    for [Gr_L/4]^(1/4) and only sets how thin the layer appears; c = 40
+    corresponds to a typical laminar Grashof number."""
+    import os
+    import numpy as np
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    P = Params()
+    sol = solve_case(P)
+    X = np.linspace(0.05, 1.0, 500)
+    Y = np.linspace(0.0, 0.18, 500)
+    XX, YY = np.meshgrid(X, Y, indexing="ij")
+    ETA = c * YY * XX ** -0.25
+    st = sol.sol(np.clip(ETA, 0, 10).ravel())
+    f = st[0].reshape(ETA.shape)
+    fp = st[1].reshape(ETA.shape)
+    th = st[5].reshape(ETA.shape)
+    ph = st[7].reshape(ETA.shape)
+    out = ETA > 10
+    U = np.clip(XX ** 0.5 * fp, 0, None); U[out] = 0.0
+    TH = np.clip(th, 0, None); TH[out] = 0.0
+    PH = np.clip(ph, 0, None); PH[out] = 0.0
+    PSI = np.ma.masked_where(ETA > eta_e, XX ** 0.75 * f)
+    edge = eta_e * X ** 0.25 / c
+
+    fig, axes = plt.subplots(1, 3, figsize=(13.5, 3.9), dpi=300)
+    panels = [(U, "viridis", r"$u/U_{\rm ref}$", "(a) Streamwise velocity and streamlines"),
+              (TH, "inferno", r"$\theta$", "(b) Temperature field"),
+              (PH, "cividis", r"$\phi$", "(c) Concentration field")]
+    for ax, (F, cm, lab, ttl) in zip(axes, panels):
+        cf = ax.contourf(XX, YY, F, levels=22, cmap=cm, extend="both")
+        fig.colorbar(cf, ax=ax, shrink=0.88, label=lab)
+        ax.plot(X, edge, "w--", lw=1.2)
+        ax.set_xlabel(r"$x/L$"); ax.set_ylabel(r"$y/L$")
+        ax.set_title(ttl, fontsize=10); ax.set_ylim(0, 0.18)
+    axes[0].contour(XX, YY, PSI, levels=12, colors="w", linewidths=0.5, alpha=0.65)
+    fig.tight_layout()
+    os.makedirs(outdir, exist_ok=True)
+    path = os.path.join(outdir, "fig2_physical_fields.pdf")
+    fig.savefig(path, bbox_inches="tight")
+    print(f"Manuscript Figure 2 saved to {path}")
+    return path

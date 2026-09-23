@@ -1,6 +1,6 @@
 """
 Generates the entropy-generation decomposition and Bejan-number
-profiles used in manuscript Figure 7 (output files retain their
+profiles used in manuscript Figure 8 (output files retain their
 original fig9/fig10 names), for Section 4.7 of the manuscript. Run
 after run_analysis.py.
 """

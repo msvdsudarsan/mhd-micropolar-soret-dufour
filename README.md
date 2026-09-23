@@ -110,8 +110,8 @@ directly from the manuscript's equations:
 | File | Purpose |
 |---|---|
 | `model.py` | The ODE system, boundary conditions, `solve_case()`. |
-| `run_analysis.py` | Reproduces Tables 2, 3 and 4, the synergy index, all four Ostrach/Rees-Pop external checks, the regularity-map verification (Fig. 8), the sensitivity ranking, the trade-off analysis (Fig. 9), and the raw panels of Figs. 1-4 and the two-panel core of Fig. 5(a-b). Table 6 and the third panel of Figs. 5-6 are produced by `transport_budget.py` (see below). |
-| `transport_budget.py` | Reproduces the exact energy- and species-equation transport-budget decomposition (Table 5), the mechanism-isolation comparison and the extended limiting-case reductions (Table 6), the species-transport dominance data of Fig. 5(c) (`species_dominance_map()`) and the energy-transport dominance data of Fig. 6(c) (`energy_dominance_map()`). Run `python transport_budget.py` for the numerical summary above; run `python transport_budget.py --figures` to also regenerate the complete manuscript Fig. 5 and Fig. 6 as PDF files (`make_figure5()`, `make_figure6()`), which takes noticeably longer since each dominance panel requires a 25x25 or 30x30 grid of full BVP solves. |
+| `run_analysis.py` | Reproduces Tables 2, 3 and 4, the synergy index, all four Ostrach/Rees-Pop external checks, the regularity-map verification (Fig. 9), the sensitivity ranking, the trade-off analysis (Fig. 10), and the raw panels of Figs. 1-5 and the two-panel core of Fig. 6(a-b). Table 6 and the third panel of Figs. 5-6 are produced by `transport_budget.py` (see below). |
+| `transport_budget.py` | Reproduces the exact energy- and species-equation transport-budget decomposition (Table 5), the mechanism-isolation comparison and the extended limiting-case reductions (Table 6), the species-transport dominance data of Fig. 6(c) (`species_dominance_map()`) and the energy-transport dominance data of Fig. 7(c) (`energy_dominance_map()`). Run `python transport_budget.py` for the numerical summary above; run `python transport_budget.py --figures` to also regenerate the complete manuscript Fig. 6 and Fig. 7 as PDF files (`make_figure5()`, `make_figure6()`), which takes noticeably longer since each dominance panel requires a 25x25 or 30x30 grid of full BVP solves. |
 | `shooting_crosscheck.py` | The independent shooting-method cross-check described above. Run directly: `python shooting_crosscheck.py`. |
 | `entropy.py` | The entropy-generation number Ns(eta) and Bejan number Be(eta) (Section 4.7), derived from the same solved profiles as the rest of the paper. |
 | `make_entropy_figures.py` | Generates manuscript Fig. 7 (entropy-generation decomposition and Bejan-number vs M) from `entropy.py`. Run after `run_analysis.py`. |
@@ -128,14 +128,15 @@ is:
 | Code output / function | Manuscript item |
 |---|---|
 | `fig1_base_case.{pdf,png}` | **Fig. 1** (base-case profiles) |
-| `fig3_Sr.{pdf,png}` | **Fig. 2** (Soret-number effect) |
-| `fig4_Du.{pdf,png}` | **Fig. 3** (Dufour-number effect) |
-| `fig6_Sc.{pdf,png}` | **Fig. 4** (Schmidt-number effect) |
-| `fig8_SrDu_contour.{pdf,png}` | **Fig. 5** (joint Soret-Dufour sweep) |
-| transport-budget figure (from `transport_budget.py`) | **Fig. 6** (transport-budget decomposition) |
-| `fig9_entropy_decomposition.{pdf,png}` + `fig10_bejan_M.{pdf,png}` (from `make_entropy_figures.py`, combined into one two-panel figure for the IJHMT submission) | **Fig. 7** (entropy decomposition and Bejan number) |
-| `fig11_regularity_map.{pdf,png}` | **Fig. 8** (regularity map) |
-| `fig12_tradeoff.{pdf,png}` | **Fig. 9** (heat-transfer/irreversibility trade-off) |
+| `fig2_physical_fields.pdf` (`make_physical_field_figure()` in `run_analysis.py`) | **Fig. 2** (base-case solution in physical coordinates) |
+| `fig3_Sr.{pdf,png}` | **Fig. 3** (Soret-number effect) |
+| `fig4_Du.{pdf,png}` | **Fig. 4** (Dufour-number effect) |
+| `fig6_Sc.{pdf,png}` | **Fig. 5** (Schmidt-number effect) |
+| `fig8_SrDu_contour.{pdf,png}` | **Fig. 6** (joint Soret-Dufour sweep) |
+| transport-budget figure (from `transport_budget.py`) | **Fig. 7** (transport-budget decomposition) |
+| `fig9_entropy_decomposition.{pdf,png}` + `fig10_bejan_M.{pdf,png}` (from `make_entropy_figures.py`, combined into one two-panel figure for the IJHMT submission) | **Fig. 8** (entropy decomposition and Bejan number) |
+| `fig11_regularity_map.{pdf,png}` | **Fig. 9** (regularity map) |
+| `fig12_tradeoff.{pdf,png}` | **Fig. 10** (heat-transfer/irreversibility trade-off) |
 | M-sweep + Sr/Du/Kr/Sc single-parameter sweeps (merged, two blocks) | **Table 3** (wall-gradient parameter sweeps) |
 | algorithm cross-check + mesh/domain-independence values (merged, two blocks) | **Table 2** (numerical verification) |
 | joint Sr,Du grid | **Table 4** (joint Soret-Dufour sweep) |
@@ -168,7 +169,7 @@ pip install -r requirements.txt
 ```bash
 python run_analysis.py          # figures -> ./figures/ (PDF + 300 dpi PNG), tables -> stdout
 python shooting_crosscheck.py   # independent cross-check -> stdout
-python make_entropy_figures.py  # manuscript Figure 7 (entropy generation, Bejan number) -> ./figures/
+python make_entropy_figures.py  # manuscript Figure 8 (entropy generation, Bejan number) -> ./figures/
 ```
 
 Approximate runtime on a standard laptop CPU (single core, no

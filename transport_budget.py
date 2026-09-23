@@ -9,7 +9,7 @@ Transport-budget decomposition and mechanism-isolation analysis for:
 This script is additional to model.py / run_analysis.py and reproduces
 the two new quantitative results introduced for the IJHMT submission:
 
-  1. Table 5 and Fig. 6 of the manuscript: an exact term-by-term
+  1. Table 5 and Fig. 7 of the manuscript: an exact term-by-term
      decomposition of the energy equation (Eq. 9) and the species
      equation (Eq. 10) along the converged base-case profile, using
      theta'' and phi'' recovered from the same 2x2 solve used inside
@@ -191,7 +191,7 @@ if __name__ == "__main__":
 
 
 def species_dominance_map(Sr_vals=None, Du_vals=None):
-    """Reproduce Figure 5(c) of the manuscript: for each (Sr, Du) grid point,
+    """Reproduce Figure 6(c) of the manuscript: for each (Sr, Du) grid point,
     identify which term of the species-equation transport-budget decomposition
     (diffusion, convection, reaction, Soret) carries the largest share, using
     the same magnitude-normalized decomposition as transport_budget() above."""
@@ -218,7 +218,7 @@ def species_dominance_map(Sr_vals=None, Du_vals=None):
 
 
 def energy_dominance_map(M_vals=None, S_vals=None):
-    """Reproduce Figure 6(c) of the manuscript: for each (S, M) grid point,
+    """Reproduce Figure 7(c) of the manuscript: for each (S, M) grid point,
     identify which term of the energy-equation transport-budget decomposition
     carries the largest share, using the same magnitude-normalized
     decomposition as transport_budget() above."""
@@ -239,7 +239,7 @@ def energy_dominance_map(M_vals=None, S_vals=None):
 
 
 def make_figure5(outdir="figures", Sr_vals=None, Du_vals=None):
-    """Generate and save the complete three-panel manuscript Figure 5:
+    """Generate and save the complete three-panel manuscript Figure 6:
     (a) local Nusselt indicator -theta'(0), (b) local Sherwood indicator
     -phi'(0), and (c) the dominant species-transport mechanism, all over
     the (Sr, Du) plane. This is the exact figure used in the manuscript;
@@ -301,12 +301,12 @@ def make_figure5(outdir="figures", Sr_vals=None, Du_vals=None):
     os.makedirs(outdir, exist_ok=True)
     outpath = os.path.join(outdir, "fig5_manuscript_srdu_full.pdf")
     fig.savefig(outpath, bbox_inches="tight")
-    print(f"Figure 5 (manuscript) saved to {outpath}")
+    print(f"Figure 6 (manuscript) saved to {outpath}")
     return outpath
 
 
 def make_figure6(outdir="figures", M_vals=None, S_vals=None):
-    """Generate and save the complete three-panel manuscript Figure 6:
+    """Generate and save the complete three-panel manuscript Figure 7:
     (a) energy-equation transport-budget terms vs eta, (b) species-equation
     transport-budget terms vs eta, both at the base parameter set, and
     (c) the dominant energy-transport mechanism over the (S, M) plane.
@@ -387,12 +387,12 @@ def make_figure6(outdir="figures", M_vals=None, S_vals=None):
     os.makedirs(outdir, exist_ok=True)
     outpath = os.path.join(outdir, "fig6_manuscript_budget_full.pdf")
     fig.savefig(outpath, bbox_inches="tight")
-    print(f"Figure 6 (manuscript) saved to {outpath}")
+    print(f"Figure 7 (manuscript) saved to {outpath}")
     return outpath
 
 
 if __name__ == "__main__" and "--figures" in sys.argv:
-    # Regenerate the exact manuscript Figure 5 and Figure 6 (each a 25x25 or
+    # Regenerate the exact manuscript Figure 6 and Figure 7 (each a 25x25 or
     # 30x30 grid of full BVP solves per panel, so this is slower than the
     # default summary above). Run explicitly with:
     #   python transport_budget.py --figures
