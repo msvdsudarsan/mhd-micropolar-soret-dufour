@@ -7,7 +7,7 @@ abstract: >-
   Mechanism Analysis of Coupled Heat and Mass Transfer in MHD
   Micropolar Fluid Flow past a Vertical Plate with Thermal Dispersion,
   Soret-Dufour Effects and Chemical Reaction", submitted to the
-  International Journal of Heat and Mass Transfer. Includes the primary collocation solver, an independently
+  International Journal of Heat and Fluid Flow. Includes the primary collocation solver, an independently
   coded shooting cross-check, the entropy-generation and Bejan-number
   module, and the scripts reproducing every numerical table and figure
   in the manuscript.
